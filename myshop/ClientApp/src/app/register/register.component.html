@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card">
+        <div class="card-body p-4 p-md-5">
+          <form
+            id="registerForm"
+            [formGroup]="form"
+            (submit)="onSubmit()"
+            markRequired
+          >
+            <div class="form-group mb-2">
+              <input
+                formControlName="userName"
+                class="form-control"
+                placeholder="Username"
+              />
+              <ng-container *ngIf="isErrorState(form.get('userName'))">
+                <div
+                  class="text-danger small"
+                  *ngIf="form.get('userName')?.errors!['pattern']"
+                >
+                  Username must be alphanumeric
+                </div>
+                <div
+                  class="text-danger small"
+                  *ngIf="form.get('userName')?.errors!['maxlength']"
+                >
+                  Username cannot be more than 25 character
+                </div>
+              </ng-container>
+            </div>
+            <div class="form-group mb-2">
+              <input
+                formControlName="password"
+                type="password"
+                class="form-control"
+                placeholder="Password"
+              />
+              <ng-container *ngIf="isErrorState(form.get('password'))">
+                <div
+                  class="text-danger small"
+                  *ngIf="form.get('password')?.errors!['minlength']"
+                >
+                  Password must be at least 4 characters
+                </div>
+              </ng-container>
+            </div>
+            <div class="form-group mb-2">
+              <input
+                formControlName="confirmPassword"
+                type="password"
+                class="form-control"
+                placeholder="Confirm Password"
+              />
+              <div
+                class="text-danger small"
+                *ngIf="
+                  form.errors &&
+                  form.errors['mustMatch'] &&
+                  (form.get('confirmPassword')?.dirty ||
+                    form.get('confirmPassword')?.touched)
+                "
+              >
+                Passwords don't match
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control"
+                placeholder="Email"
+              />
+              <ng-container *ngIf="isErrorState(form.get('email'))">
+                <div
+                  class="text-danger small"
+                  *ngIf="form.get('email')?.errors!['email']"
+                >
+                  Invalid email address
+                </div>
+              </ng-container>
+            </div>
+            <div class="form-group mb-2">
+              <input
+                formControlName="displayName"
+                class="form-control"
+                placeholder="Full Name"
+              />
+              <ng-container *ngIf="isErrorState(form.get('displayName'))">
+                <div
+                  class="text-danger small"
+                  *ngIf="form.get('displayName')?.errors!['pattern']"
+                >
+                  Name must be alphanumeric
+                </div>
+                <div
+                  class="text-danger small"
+                  *ngIf="form.get('displayName')?.errors!['maxlength']"
+                >
+                  Name cannot be more than 50 character
+                </div>
+              </ng-container>
+            </div>
+            <div class="form-group text-center">
+              <a class="btn btn-link" routerLink="/login">
+                Already have account? Login
+              </a>
+              <button
+                class="btn btn-primary btn-block"
+                data-effect="wave"
+                type="submit"
+                [disabled]="form.invalid"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

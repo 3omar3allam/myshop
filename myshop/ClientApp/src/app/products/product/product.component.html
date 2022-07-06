@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">{{ product.name }}</h3>
+    <p class="card-text small text-muted">
+      {{ product.categoryName }}
+    </p>
+    <div class="row">
+      <p class="card-text col-12 col-sm-6">{{ product.price }}&nbsp;EGP</p>
+      <div class="card-text col-12 col-sm-6">
+        <app-product-discount
+          *ngIf="product.discount"
+          [discount]="product.discount"
+        ></app-product-discount>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-outline-primary" (click)="purchaseProduct.emit(this.product)">Buy</button>
+      <span *ngIf="canEdit">
+        <button class="btn btn-outline-secondary" (click)="editProduct.emit(this.product)">Edit</button>
+        <button class="btn btn-outline-danger" (click)="deleteProduct.emit(this.product)">Delete</button>
+      </span>
+    </div>
+  </div>
+</div>

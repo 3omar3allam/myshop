@@ -1,0 +1,27 @@
+<app-category-list
+  (categoryChanged)="onChangeCategory($event)"
+></app-category-list>
+<div class="d-flex justify-content-end mt-2" *ngIf="isAdmin$ | async">
+  <button class="btn btn-primary" (click)="addProduct()">New Product</button>
+</div>
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <ng-container *ngIf="products$ | async as products">
+      <ng-container *ngIf="products.length > 0; else empty">
+        <div *ngFor="let product of products" class="col-12 col-sm-6 col-md-3">
+          <app-product
+            [product]="product"
+            [canEdit]="isAdmin$ | async"
+            (purchaseProduct)="openPurchaseModal($event)"
+            (editProduct)="updateProduct($event)"
+            (deleteProduct)="deleteProduct($event)"
+          ></app-product>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #empty>
+      <div class="alert alert-info">No products found</div>
+    </ng-template>
+  </div>
+</div>

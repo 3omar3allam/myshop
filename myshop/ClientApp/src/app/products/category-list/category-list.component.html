@@ -1,0 +1,4 @@
+<select class="form-control" (change)="changeCategory($event)">
+    <option [value]="null">All Categories</option>
+    <option *ngFor="let cat of categories$ | async" [value]="cat.id" [selected]="cat.id == defaultCategory">{{cat.name}}</option>
+</select>
