@@ -32,7 +32,7 @@ namespace MyShop.Web.Controllers
         {
             var response = await _authService.LoginAsync(model.UserName, model.Password, cancellationToken);
             if (response is null) throw new ApiException("Login failed", (int)HttpStatusCode.Unauthorized);
-            AddSecureCookie("X-Access-Token", response.Token, response.ExpiresAt);
+            //AddSecureCookie("X-Access-Token", response.Token, response.ExpiresAt);
             return Ok(response);
         }
 
@@ -46,7 +46,7 @@ namespace MyShop.Web.Controllers
             var customer = _mapper.Map<ApplicationUser>(model);
             var response = await _authService.RegisterCustomerAsync(customer, model.Password, cancellationToken);
             if (response is null) throw new ApiException("Registration failed", (int)HttpStatusCode.Unauthorized);
-            AddSecureCookie("X-Access-Token", response.Token, response.ExpiresAt);
+            //AddSecureCookie("X-Access-Token", response.Token, response.ExpiresAt);
             return Ok(response);
         }
 

@@ -29,9 +29,14 @@ export class AuthService {
         return this._currentUser$.asObservable();
     }
 
+    get token() {
+        const data = this.getAuthData();
+        return data?.token;
+    }
+
     get isTokenExpired() {
         const data = this.getAuthData();
-        return !data?.expiresAt || new Date(data.expiresAt) < new Date()
+        return !data?.expiresAt || new Date(data.expiresAt) < new Date();
     }
 
     constructor(private http: HttpClient, private router: Router) { }

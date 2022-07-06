@@ -64,11 +64,11 @@ namespace MyShop.Web
                 options.TokenValidationParameters = tokenValidationParameters;
                 options.Events = new JwtBearerEvents
                 {
-                    OnMessageReceived = context =>
-                    {
-                        context.Token = context.Request.Cookies["X-Access-Token"];
-                        return Task.CompletedTask;
-                    }
+                    //OnMessageReceived = context =>
+                    //{
+                    //    context.Token = context.Request.Cookies["X-Access-Token"];
+                    //    return Task.CompletedTask;
+                    //}
                 };
             });
 
@@ -84,7 +84,7 @@ namespace MyShop.Web
                 {
                     Description = "JWT Authorization header using the bearer scheme",
                     Name = "Authorization",
-                    In = ParameterLocation.Cookie,
+                    In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
