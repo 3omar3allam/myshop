@@ -16,6 +16,8 @@ import { CreateOrUpdateProductComponent } from './products/create-or-update-prod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpInterceptorProvider } from './shared/common/interceptopr-provider';
+import { AuthInterceptor } from './shared/services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [HttpInterceptorProvider.create(AuthInterceptor)],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

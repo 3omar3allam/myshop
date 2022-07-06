@@ -6,8 +6,6 @@ import { CurrentUser } from "../models/current-user";
 import { LoginResponse } from "../models/login-response";
 import { RegisterCustomer } from "../models/register-customer";
 
-const LOCAL_STORAGE_KEY = 'myshop:user';
-
 @Injectable({
     providedIn: 'root'
 })
@@ -32,7 +30,7 @@ export class AuthService {
     }
 
     get isTokenExpired() {
-        var data = this.getAuthData();
+        const data = this.getAuthData();
         return !data?.expiresAt || new Date(data.expiresAt) < new Date()
     }
 
@@ -50,19 +48,20 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.removeItem(LOCAL_STORAGE_KEY);
+        localStorage.removeItem("user");
+        localStorage.removeItem("temp_order");
         this._isAuthenticated$.next(false);
         this._currentUser$.next(null);
         this.router.navigate(['/login']);
     }
 
     saveAuthData(loginResponse: LoginResponse) {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(loginResponse));
+        localStorage.setItem("user", JSON.stringify(loginResponse));
         this.initAuth();
     }
 
     getAuthData(): LoginResponse | null {
-        var data = localStorage.getItem(LOCAL_STORAGE_KEY);
+        var data = localStorage.getItem("user");
         if (data) {
             return JSON.parse(data) as LoginResponse;
         } else {

@@ -7,9 +7,9 @@
             return app.UseMiddleware<ExceptionHandlingMiddleware>();
         }
 
-        //public static IApplicationBuilder UseCurrentUser(this IApplicationBuilder app)
-        //{
-        //    return app.UseMiddleware<SaveCurrentUserMiddleware>();
-        //}
+        public static IApplicationBuilder UseCurrentUser(this IApplicationBuilder app)
+        {
+            return app.UseMiddleware<SaveCurrentUserMiddleware>();
+        }
     }
 }

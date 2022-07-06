@@ -8,11 +8,6 @@ namespace MyShop.Persistence.Services
 {
     internal class CurrentUserService : ICurrentUser
     {
-        public CurrentUserService(IHttpContextAccessor contextAccessor)
-        {
-            Authenticate(contextAccessor.HttpContext.User);
-        }
-
         public bool IsAuthenticated { get; private set; }
         public string? UserId { get; private set; }
         public string? Username { get; private set; }

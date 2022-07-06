@@ -35,8 +35,8 @@ app.UseCustomExceptionHandler();
 app.UseRouting();
 app.UseCors();
 app.UseAuthentication();
-
 app.UseAuthorization();
+app.UseCurrentUser();
 
 app.UseEndpoints(builder =>
 {

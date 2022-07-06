@@ -11,16 +11,10 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private authService: AuthService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.url.startsWith('/api/')) {
+        if (req.url.indexOf("/api/") != -1) {
             req = req.clone({
                 withCredentials: true,
             });
-            // if (!req.url.startsWith('/api/auth')) {
-            //     if (this.authService.isAuthenticated && this.authService.isTokenExpired) {
-            //         return this.authService.refresh()
-            //             .pipe(mergeMap(() => next.handle(req)));
-            //     }
-            // }
         }
         return next.handle(req);
     }

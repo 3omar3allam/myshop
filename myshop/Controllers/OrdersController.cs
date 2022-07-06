@@ -6,12 +6,14 @@ using MyShop.Core.Common;
 using MyShop.Core.Common.Models;
 using MyShop.Core.Common.Models.Orders;
 using MyShop.Core.Interfaces;
+using MyShop.Web.Filters;
 using System.Net;
 
 namespace MyShop.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiAuthorize]
     public class OrdersController : ControllerBase
     {
         private readonly IOrderService _orderService;
@@ -25,6 +27,7 @@ namespace MyShop.Web.Controllers
         [Route("", Name = nameof(CreateOrder))]
         [ProducesResponseType(typeof(CreateOrderResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateOrder(CreateOrderRequest dto, CancellationToken cancellationToken)
         {
             return Ok(await _orderService.CreateOrderAsync(dto, cancellationToken));
@@ -35,7 +38,6 @@ namespace MyShop.Web.Controllers
         [ProducesResponseType(typeof(NoContentResult), (int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.Conflict)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Constants.Roles.CustomerRoleName)]
         public async Task<IActionResult> AssociateCustomerIdToOrder(int id, CancellationToken cancellationToken)
         {
             await _orderService.AssociateCustomerToOrderAsync(id, cancellationToken);
