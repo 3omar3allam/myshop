@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using MyShop.Core;
 using MyShop.Persistence;
 using MyShop.Web;
@@ -50,10 +48,6 @@ app.UseEndpoints(builder =>
 app.UseSpa(spa =>
 {
     spa.Options.SourcePath = "ClientApp";
-    //if (builder.Environment.IsDevelopment())
-    //{
-    //    spa.UseAngularCliServer(npmScript: "start");
-    //}
 });
 
 app.Run();
