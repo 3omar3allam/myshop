@@ -4,7 +4,7 @@ using MyShop.Core.Entities;
 
 namespace MyShop.Persistence
 {
-    internal class MyShopDbContext : IdentityDbContext<ApplicationUser>
+    public class MyShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public MyShopDbContext(DbContextOptions<MyShopDbContext> options) : base(options)
         { }

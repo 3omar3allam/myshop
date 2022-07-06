@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using MyShop.Core;
 using MyShop.Persistence;
 using MyShop.Web;
@@ -49,5 +50,21 @@ app.UseSpa(spa =>
 {
     spa.Options.SourcePath = "ClientApp";
 });
+
+
+try
+{
+    var autoMigrate = builder.Configuration["AutoMigrate"];
+    if (autoMigrate == "True")
+    {
+        using var scope = app.Services.CreateScope();
+        var dbContex = scope.ServiceProvider.GetRequiredService<MyShopDbContext>();
+        if (dbContex is not null)
+        {
+            await dbContex.Database.MigrateAsync();
+        }
+    }
+}
+catch { }
 
 app.Run();
