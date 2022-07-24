@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\test.component.ts" />
+    <Compile Remove="ClientApp\**" />
+    <Content Remove="ClientApp\**" />
+    <EmbeddedResource Remove="ClientApp\**" />
+    <None Remove="ClientApp\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,9 +37,4 @@
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\test.component.ts" />
-  </ItemGroup>
-
 </Project>
