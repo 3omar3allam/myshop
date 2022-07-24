@@ -3,7 +3,7 @@
 ## [Live Demo](http://allamov-001-site1.ftempurl.com/)
 
 ### Installation:
-1. `Update-Database` to generate DB schema and initial test data
+1. `Update-Database` to generate DB schema and initial test data, or set `AutoMigrate: "True"` in appsettings.json
 2. Run the web application
 3. Angular app is already pre-built doesn't need to be run
 4. If changes in the angular project is needed: run `npm run watch` from the client app to see live changes
